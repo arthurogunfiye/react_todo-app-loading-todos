@@ -1,5 +1,3 @@
-/* eslint-disable no-console */
-
 import { useContext, useEffect, useRef, useState } from 'react';
 import { TodoContext } from '../../context/TodoContext';
 import { ErrorMessageType } from '../../types/ErrorMessageType';
@@ -74,12 +72,8 @@ export const Header = () => {
           setTitle('');
         }
       }
-    } catch (error: unknown) {
-      if (error instanceof Error) {
-        console.log(error.message);
-
-        return;
-      }
+    } catch (error) {
+      setErrorType(ErrorMessageType.Add);
     }
   };
 

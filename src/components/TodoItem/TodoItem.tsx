@@ -1,6 +1,5 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable jsx-a11y/control-has-associated-label */
-/* eslint-disable no-console */
 
 import cn from 'classnames';
 import { Todo } from '../../types/Todo';
@@ -53,7 +52,6 @@ export const TodoItem = ({ todo }: TodoItemProps) => {
       }
     } catch (error) {
       setErrorType(ErrorMessageType.Update);
-      console.error(error);
     } finally {
       setIsLoading(false);
     }
@@ -65,13 +63,9 @@ export const TodoItem = ({ todo }: TodoItemProps) => {
       const response = await deleteTodo(postId);
 
       if (response) {
-        try {
-          const data = await getTodos();
+        const data = await getTodos();
 
-          setTodos([...data]);
-        } catch (error) {
-          setErrorType(ErrorMessageType.Loading);
-        }
+        setTodos([...data]);
       }
     } catch (error) {
       setErrorType(ErrorMessageType.Delete);
