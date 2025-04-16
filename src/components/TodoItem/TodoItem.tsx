@@ -30,8 +30,10 @@ export const TodoItem = ({ todo }: TodoItemProps) => {
     setIsEditing(false);
   };
 
-  const handleOnTitleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setTitle(event.target.value);
+  const handleOnTitleChange = (
+    changeEvent: React.ChangeEvent<HTMLInputElement>,
+  ) => {
+    setTitle(changeEvent.target.value);
   };
 
   const handleOnCheckTodo = async () => {
@@ -71,11 +73,7 @@ export const TodoItem = ({ todo }: TodoItemProps) => {
           setErrorType(ErrorMessageType.Loading);
         }
       }
-    } catch (error: unknown) {
-      if (error instanceof Error) {
-        setErrorType(ErrorMessageType.Delete);
-      }
-
+    } catch (error) {
       setErrorType(ErrorMessageType.Delete);
     } finally {
       setIsLoading(false);
@@ -107,14 +105,12 @@ export const TodoItem = ({ todo }: TodoItemProps) => {
           }
         } catch (error) {
           setErrorType(ErrorMessageType.Loading);
-          throw new Error('An error ocurred');
         } finally {
           setIsLoading(false);
         }
       }
     } catch (error) {
       setErrorType(ErrorMessageType.Update);
-      throw new Error('An error ocurred');
     } finally {
       setIsLoading(false);
     }
